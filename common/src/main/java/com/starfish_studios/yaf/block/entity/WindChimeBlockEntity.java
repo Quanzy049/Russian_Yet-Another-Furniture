@@ -39,7 +39,7 @@ public class WindChimeBlockEntity extends BlockEntity {
     }
 
     public void commonTick(Level level, BlockState state) {
-        if (Platform.getEnvironment() != Env.SERVER) {
+        if (level.isClientSide) {
             if (level instanceof ClientLevel clientLevel) {
                 clientTick(clientLevel);
             }
