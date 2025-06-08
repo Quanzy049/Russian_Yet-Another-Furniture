@@ -16,6 +16,7 @@ public class YAFClientEvents {
     public static void registerModels(final EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(FanBlockEntityModel.LAYER_LOCATION, FanBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(ChimeBlockEntityModel.LAYER_LOCATION, ChimeBlockEntityModel::createBodyLayer);
+        event.registerLayerDefinition(DrawerCountertopModel.LAYER_LOCATION, DrawerCountertopModel::createBodyLayer);
         event.registerLayerDefinition(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(TableclothModel.LAYER_LOCATION, TableclothModel::createBodyLayer);
         event.registerLayerDefinition(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);

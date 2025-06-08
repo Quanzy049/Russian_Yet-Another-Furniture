@@ -7,6 +7,7 @@ package com.starfish_studios.yaf.block.entity;
 
 import com.starfish_studios.yaf.block.CabinetBlock;
 import com.starfish_studios.yaf.block.DrawerBlock;
+import com.starfish_studios.yaf.block.properties.CountertopType;
 import com.starfish_studios.yaf.inventory.DrawerMenu;
 import com.mojang.datafixers.util.Pair;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
@@ -18,6 +19,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -47,11 +49,13 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     private static final SoundEvent SOUND_OPEN = SoundEvents.BARREL_OPEN;
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
+    public CountertopType countertopType;
     private NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
     public ContainerOpenersCounter openersCounter;
 
     public AbstractDrawerBlockEntity(BlockEntityType<?> be, BlockPos blockPos, BlockState blockState) {
         super(be, blockPos, blockState);
+        countertopType = CountertopType.getFromState(blockState);
 
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
@@ -79,12 +83,41 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     protected void saveAdditional(@NotNull CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
         ContainerHelper.saveAllItems(compoundTag, this.items);
+        if (countertopType != null) {
+            compoundTag.putString("CountertopType", countertopType.getSerializedName());
+        }
     }
 
     public void load(@NotNull CompoundTag compoundTag) {
         super.load(compoundTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(compoundTag, this.items);
+        if (compoundTag.contains("CountertopType")) {
+            String countertopName = compoundTag.getString("CountertopType");
+            this.countertopType = CountertopType.valueOf(countertopName.toUpperCase());
+        }
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (this.getLevel() != null) {
+            this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+        }
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        CompoundTag compoundtag = new CompoundTag();
+        if (countertopType != null) {
+            compoundtag.putString("CountertopType", countertopType.getSerializedName());
+        }
+        return compoundtag;
     }
 
     public int getContainerSize() {

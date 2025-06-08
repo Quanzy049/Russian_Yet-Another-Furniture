@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class DrawerBlockEntity extends AbstractDrawerBlockEntity {
+
     public DrawerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(YAFBlockEntities.DRAWER.get(), blockPos, blockState);
     }

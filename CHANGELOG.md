@@ -6,3 +6,5 @@
 - Fixed Chairs missing textures when sawed
 - Fixed Spruce table missing texture
 - Fixed Curtain connection logic
+- Fixed Chair item
+- Converted Drawer and Cabinet to BER

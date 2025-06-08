@@ -1,0 +1,6 @@
+{
+  "parent": "yaf:block/template/chair_1",
+  "textures": {
+    "all": "yaf:block/chair/crimson_chair1"
+  }
+}
