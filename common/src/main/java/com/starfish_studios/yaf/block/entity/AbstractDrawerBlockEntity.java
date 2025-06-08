@@ -76,18 +76,20 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
         };
     }
 
-    protected void saveAdditional(@NotNull CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items);
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.saveAdditional(compoundTag, registries);
+        ContainerHelper.saveAllItems(compoundTag, this.items, registries);
         if (countertopType != null) {
             compoundTag.putString("CountertopType", countertopType.getSerializedName());
         }
     }
 
-    public void load(@NotNull CompoundTag compoundTag) {
-        super.load(compoundTag);
+    @Override
+    public void loadAdditional(@NotNull CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.loadAdditional(compoundTag, registries);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compoundTag, this.items);
+        ContainerHelper.loadAllItems(compoundTag, this.items, registries);
         if (compoundTag.contains("CountertopType")) {
             String countertopName = compoundTag.getString("CountertopType");
             this.countertopType = CountertopType.valueOf(countertopName.toUpperCase());
@@ -108,11 +110,13 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+
         CompoundTag compoundtag = new CompoundTag();
         if (countertopType != null) {
             compoundtag.putString("CountertopType", countertopType.getSerializedName());
         }
+
         return compoundtag;
     }
 

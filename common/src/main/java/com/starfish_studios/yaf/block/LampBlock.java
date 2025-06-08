@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
 import com.starfish_studios.yaf.block.entity.LampBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.registry.YAFSoundEvents;
@@ -53,6 +54,11 @@ public class LampBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
                 .setValue(LIT, false)
                 .setValue(LAMP_TYPE, LampType.SINGLE)
                 .setValue(LAMPSHADE, ColorList.WHITE);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(LampBlock::new);
     }
 
     @Override

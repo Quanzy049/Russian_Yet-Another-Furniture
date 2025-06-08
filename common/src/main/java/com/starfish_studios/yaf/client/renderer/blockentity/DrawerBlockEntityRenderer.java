@@ -26,7 +26,7 @@ public class DrawerBlockEntityRenderer<T extends AbstractDrawerBlockEntity> impl
 
     public ResourceLocation getTextureLocation(AbstractDrawerBlockEntity entity) {
         var material = entity.countertopType.toString().toLowerCase(Locale.ROOT);
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/drawer_countertop/" + material + ".png");
+        return YetAnotherFurniture.id("textures/entity/drawer_countertop/" + material + ".png");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DrawerBlockEntityRenderer<T extends AbstractDrawerBlockEntity> impl
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, -1);
         poseStack.popPose();
     }
 }
