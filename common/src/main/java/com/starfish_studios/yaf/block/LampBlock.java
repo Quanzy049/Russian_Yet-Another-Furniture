@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.LampBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.registry.YAFSoundEvents;
 import net.minecraft.core.BlockPos;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,8 +31,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class LampBlock extends Block implements SimpleWaterloggedBlock {
+public class LampBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final EnumProperty<LampType> LAMP_TYPE = EnumProperty.create("lamp_type", LampType.class);
@@ -163,6 +166,11 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
             case MIDDLE, TOP -> belowIsLamp;
             case BOTTOM -> aboveIsLamp;
         };
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new LampBlockEntity(pos, state);
     }
 
     public enum LampType implements StringRepresentable {
