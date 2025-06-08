@@ -30,6 +30,7 @@ public class YetAnotherFurnitureClient {
 
         EntityModelLayerRegistry.register(FanBlockEntityModel.LAYER_LOCATION, FanBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(ChimeBlockEntityModel.LAYER_LOCATION, ChimeBlockEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.register(DrawerCountertopModel.LAYER_LOCATION, DrawerCountertopModel::createBodyLayer);
         EntityModelLayerRegistry.register(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(TableclothModel.LAYER_LOCATION, TableclothModel::createBodyLayer);
         EntityModelLayerRegistry.register(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);
@@ -44,6 +45,7 @@ public class YetAnotherFurnitureClient {
         BlockEntityRendererRegistry.register(YAFBlockEntities.CHAIR.get(), ChairBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.TALL_STOOL.get(), TallStoolBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.DRAWER.get(), DrawerBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(YAFBlockEntities.CABINET.get(), DrawerBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.LAMP.get(), LampBlockEntityRenderer::new);
 
         ClientLifecycleEvent.CLIENT_SETUP.register(instance -> {

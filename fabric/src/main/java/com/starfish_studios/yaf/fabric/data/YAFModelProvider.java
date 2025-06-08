@@ -2,12 +2,9 @@ package com.starfish_studios.yaf.fabric.data;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.*;
-import com.starfish_studios.yaf.block.properties.ChairType;
-import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.block.properties.CountertopType;
 import com.starfish_studios.yaf.registry.YAFBlocks;
 import com.starfish_studios.yaf.registry.YAFItems;
-import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
@@ -71,9 +68,6 @@ public class YAFModelProvider extends FabricModelProvider {
     public static final ModelTemplate SHELF_DOUBLE_SINGLE = createTemplate("shelf/shelf_wall_double", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
 
-    public static final ModelTemplate CHAIR_BACKLESS = createTemplate("chair_backless", TextureSlot.ALL);
-    public static final ModelTemplate CHAIR_ITEM = createTemplate("chair1", TextureSlot.ALL, TextureSlot.PARTICLE);
-
     public static final ModelTemplate CURTAIN_SINGLE_CLOSED = createTemplate("curtain_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_MIDDLE_CLOSED = createTemplate("curtain_bottom_middle_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
 
@@ -109,7 +103,6 @@ public class YAFModelProvider extends FabricModelProvider {
         YAFBlocks.DRAWERS.forEach((omfWoodType, supplier) -> createDrawerBlock(generators, supplier.get()));
         YAFBlocks.CABINET.forEach((omfWoodType, supplier) -> createCabinetBlock(generators, supplier.get()));
         YAFBlocks.SHELVES.forEach((omfWoodType, supplier) -> createShelfBlock(generators, supplier.get()));
-        //YAFBlocks.CHAIRS.forEach((omfWoodType, supplier) -> createChairBlock(generators, supplier.get()));
 
         createWindChimeBlock(generators, YAFBlocks.AMETHYST_WIND_CHIMES.get());
         createWindChimeBlock(generators, YAFBlocks.BAMBOO_WIND_CHIMES.get());
@@ -296,7 +289,6 @@ public class YAFModelProvider extends FabricModelProvider {
         YAFBlocks.FLOWER_BASKETS.forEach((omfWoodType, supplier) -> generators.generateFlatItem(supplier.get().asItem(), ModelTemplates.FLAT_ITEM));
         YAFBlocks.CURTAINS.forEach((omfWoodType, supplier) -> generators.generateFlatItem(supplier.get().asItem(), ModelTemplates.FLAT_ITEM));
         YAFBlocks.DRAWERS.forEach(((omfWoodType, supplier) -> createDrawerItem(generators, supplier.get().asItem(), supplier.get())));
-        YAFBlocks.CHAIRS.forEach(((omfWoodType, supplier) -> createChairItem(generators, supplier.get().asItem(), supplier.get())));
         YAFBlocks.CABINET.forEach(((omfWoodType, supplier) -> createCabinetItem(generators, supplier.get().asItem(), supplier.get())));
         YAFItems.FANS.forEach(((omfWoodType, supplier) ->  generators.generateFlatItem(supplier.get(), ModelTemplates.FLAT_ITEM)));
 
@@ -324,20 +316,6 @@ public class YAFModelProvider extends FabricModelProvider {
                 .put(COUNTERTOP_SIDES, getTexture(block, "drawers/countertop", "_countertop_sides"));
         DRAWER_CUBE_INVENTORY.create(ModelLocationUtils.getModelLocation(item), baseMapping, generators.output);
     }
-
-    public final void createChairItem(ItemModelGenerators generators, Item item, Block block) {
-        String blockPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        ResourceLocation parent = YetAnotherFurniture.id("block/" + blockPath + "_1");
-        ResourceLocation itemModelLocation = ModelLocationUtils.getModelLocation(item);
-
-        generators.output.accept(itemModelLocation, () -> {
-            JsonObject json = new JsonObject();
-            json.addProperty("parent", parent.toString());
-            return json;
-        });
-    }
-
-
 
     public final void createDrawerBlock(BlockModelGenerators generators, Block block) {
         TextureMapping baseMapping = new TextureMapping()
@@ -402,18 +380,6 @@ public class YAFModelProvider extends FabricModelProvider {
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
 
         for (boolean bl : new boolean[]{true, false}) {
-
-            for (CountertopType type : CountertopType.values()) {
-                var string = bl ? "block/drawers/countertop/countertop_" + type.getSerializedName() :
-                        "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom";
-                multiPart.with(
-                        Condition.condition()
-                                .term(DrawerBlock.COUNTERTOP, type)
-                                .term(CabinetBlock.BOTTOM, bl),
-                        Variant.variant()
-                                .with(VariantProperties.MODEL, YetAnotherFurniture.id( string))
-                );
-            }
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 multiPart.with(
                         Condition.condition()
@@ -434,12 +400,7 @@ public class YAFModelProvider extends FabricModelProvider {
             ResourceLocation drawerId
     ) {
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
-        for (CountertopType type : CountertopType.values()) {
-            multiPart.with(
-                    Condition.condition().term(DrawerBlock.COUNTERTOP, type),
-                    Variant.variant().with(VariantProperties.MODEL, YetAnotherFurniture.id( "block/drawers/countertop/countertop_" + type.getSerializedName()))
-            );
-        }
+
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             multiPart.with(
                     Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction),

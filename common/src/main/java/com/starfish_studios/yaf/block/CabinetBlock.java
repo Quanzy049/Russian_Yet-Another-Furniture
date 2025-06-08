@@ -40,7 +40,6 @@ public class CabinetBlock extends AbstractDrawerBlock {
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BOTTOM, true)
-                .setValue(COUNTERTOP, CountertopType.OAK)
         );
     }
 
@@ -52,16 +51,14 @@ public class CabinetBlock extends AbstractDrawerBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BOTTOM, COUNTERTOP);
+        builder.add(FACING, BOTTOM);
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        var countertop = CountertopType.getFromBlock(plankBlock);
 
         BlockState blockState2 = this.defaultBlockState()
                 .setValue(BOTTOM, true)
-                .setValue(COUNTERTOP, countertop)
                 .setValue(FACING, context.getHorizontalDirection().getOpposite());
 
         Direction upOrDown = context.getNearestLookingVerticalDirection();
