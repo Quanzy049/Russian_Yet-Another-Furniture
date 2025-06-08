@@ -28,6 +28,14 @@ public class YAFBlockEntities {
             ).build(null)
     );
 
+    public static final RegistrySupplier<BlockEntityType<LampBlockEntity>> LAMP = BLOCK_ENTITY_TYPES.register("lamp",
+            () -> BlockEntityType.Builder.of(LampBlockEntity::new,
+                    YAFBlocks.LAMPS.values().stream()
+                            .map(RegistrySupplier::get)
+                            .toArray(Block[]::new)
+            ).build(null)
+    );
+
     public static final RegistrySupplier<BlockEntityType<CabinetBlockEntity>> CABINET = BLOCK_ENTITY_TYPES.register("cabinet",
             () -> BlockEntityType.Builder.of(CabinetBlockEntity::new,
                     YAFBlocks.CABINET.values().stream()

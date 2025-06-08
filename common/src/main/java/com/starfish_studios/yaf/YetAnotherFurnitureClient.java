@@ -43,6 +43,8 @@ public class YetAnotherFurnitureClient {
         BlockEntityRendererRegistry.register(YAFBlockEntities.TABLE.get(), TableBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.CHAIR.get(), ChairBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.TALL_STOOL.get(), TallStoolBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(YAFBlockEntities.DRAWER.get(), DrawerBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(YAFBlockEntities.LAMP.get(), LampBlockEntityRenderer::new);
 
         ClientLifecycleEvent.CLIENT_SETUP.register(instance -> {
             MenuRegistry.registerScreenFactory(YAFMenus.DRAWER.get(), DrawerScreen::new);
