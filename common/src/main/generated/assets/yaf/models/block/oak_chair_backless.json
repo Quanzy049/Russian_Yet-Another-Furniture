@@ -1,6 +1,0 @@
-{
-  "parent": "yaf:block/template/chair_backless",
-  "textures": {
-    "all": "yaf:block/chair/oak_chair"
-  }
-}

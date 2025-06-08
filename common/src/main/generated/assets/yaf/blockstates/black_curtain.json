@@ -48,6 +48,10 @@
       "model": "yaf:block/black_curtain_single_closed",
       "y": 90
     },
+    "facing=east,open=false,shape=vertical_middle": {
+      "model": "yaf:block/black_curtain_single_closed",
+      "y": 90
+    },
     "facing=east,open=true,shape=bottom_left": {
       "model": "yaf:block/black_curtain_bottom_left_open",
       "y": 90
@@ -96,6 +100,10 @@
       "model": "yaf:block/black_curtain_top_single_open",
       "y": 90
     },
+    "facing=east,open=true,shape=vertical_middle": {
+      "model": "yaf:block/black_curtain_single_open",
+      "y": 90
+    },
     "facing=north,open=false,shape=bottom_left": {
       "model": "yaf:block/black_curtain_closed"
     },
@@ -130,6 +138,9 @@
       "model": "yaf:block/black_curtain_single_closed"
     },
     "facing=north,open=false,shape=single": {
+      "model": "yaf:block/black_curtain_single_closed"
+    },
+    "facing=north,open=false,shape=vertical_middle": {
       "model": "yaf:block/black_curtain_single_closed"
     },
     "facing=north,open=true,shape=bottom_left": {
@@ -167,6 +178,9 @@
     },
     "facing=north,open=true,shape=single": {
       "model": "yaf:block/black_curtain_top_single_open"
+    },
+    "facing=north,open=true,shape=vertical_middle": {
+      "model": "yaf:block/black_curtain_single_open"
     },
     "facing=south,open=false,shape=bottom_left": {
       "model": "yaf:block/black_curtain_closed",
@@ -213,6 +227,10 @@
       "y": 180
     },
     "facing=south,open=false,shape=single": {
+      "model": "yaf:block/black_curtain_single_closed",
+      "y": 180
+    },
+    "facing=south,open=false,shape=vertical_middle": {
       "model": "yaf:block/black_curtain_single_closed",
       "y": 180
     },
@@ -264,6 +282,10 @@
       "model": "yaf:block/black_curtain_top_single_open",
       "y": 180
     },
+    "facing=south,open=true,shape=vertical_middle": {
+      "model": "yaf:block/black_curtain_single_open",
+      "y": 180
+    },
     "facing=west,open=false,shape=bottom_left": {
       "model": "yaf:block/black_curtain_closed",
       "y": 270
@@ -309,6 +331,10 @@
       "y": 270
     },
     "facing=west,open=false,shape=single": {
+      "model": "yaf:block/black_curtain_single_closed",
+      "y": 270
+    },
+    "facing=west,open=false,shape=vertical_middle": {
       "model": "yaf:block/black_curtain_single_closed",
       "y": 270
     },
@@ -358,6 +384,10 @@
     },
     "facing=west,open=true,shape=single": {
       "model": "yaf:block/black_curtain_top_single_open",
+      "y": 270
+    },
+    "facing=west,open=true,shape=vertical_middle": {
+      "model": "yaf:block/black_curtain_single_open",
       "y": 270
     }
   }

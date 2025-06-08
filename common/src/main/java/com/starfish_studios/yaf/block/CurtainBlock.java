@@ -50,32 +50,6 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(OPEN, false));
     }
 
-    public enum CurtainShape implements StringRepresentable {
-        SINGLE("single"),
-        LEFT("left"),
-        MIDDLE("middle"),
-        RIGHT("right"),
-        BOTTOM_SINGLE("bottom_single"),
-        BOTTOM_LEFT("bottom_left"),
-        BOTTOM_MIDDLE("bottom_middle"),
-        BOTTOM_RIGHT("bottom_right"),
-        CORNER_LEFT("corner_left"),
-        CORNER_RIGHT("corner_right"),
-        TOP("curtain_top"),
-        TOP_SINGLE("curtain_top_single");
-
-        private final String name;
-
-        CurtainShape(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public @NotNull String getSerializedName() {
-            return this.name;
-        }
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED, SHAPE, OPEN);
@@ -214,11 +188,38 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         return s.getBlock() instanceof CurtainBlock && s.getValue(FACING) == facing;
     }
 
+    public enum CurtainShape implements StringRepresentable {
+        SINGLE("single"),
+        LEFT("left"),
+        MIDDLE("middle"),
+        RIGHT("right"),
+        BOTTOM_SINGLE("bottom_single"),
+        BOTTOM_LEFT("bottom_left"),
+        BOTTOM_MIDDLE("bottom_middle"),
+        BOTTOM_RIGHT("bottom_right"),
+        CORNER_LEFT("corner_left"),
+        CORNER_RIGHT("corner_right"),
+        TOP("curtain_top"),
+        TOP_SINGLE("curtain_top_single"),
+        VERTICAL_MIDDLE("vertical_middle");
+
+        private final String name;
+
+        CurtainShape(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public @NotNull String getSerializedName() {
+            return this.name;
+        }
+    }
+
     public CurtainShape computeShape(BlockState state, Level level, BlockPos pos) {
-        // Directions
         Direction facing = state.getValue(FACING);
         Direction leftDir = facing.getCounterClockWise();
         Direction rightDir = facing.getClockWise();
+
         BlockPos abovePos = pos.above();
         BlockPos belowPos = pos.below();
         BlockPos leftPos = pos.relative(leftDir);
@@ -226,183 +227,59 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean connectedAbove = isSameCurtain(level, abovePos, facing);
         boolean connectedBelow = isSameCurtain(level, belowPos, facing);
-        boolean connectedLeft  = isSameCurtain(level, leftPos, facing);
+        boolean connectedLeft = isSameCurtain(level, leftPos, facing);
         boolean connectedRight = isSameCurtain(level, rightPos, facing);
 
         if (!connectedAbove && !connectedBelow && !connectedLeft && !connectedRight) {
             return CurtainShape.SINGLE;
         }
 
-        BlockState rightState = level.getBlockState(rightPos);
-        BlockState leftState = level.getBlockState(leftPos);
-        BlockState aboveState = level.getBlockState(abovePos);
-        BlockState belowState = level.getBlockState(belowPos);
-
-        boolean noLeftCurtain = !connectedLeft;
-        boolean noRightCurtain = !connectedRight;
-        boolean noBelowCurtain = !connectedBelow;
-        boolean noAboveCurtain = !connectedAbove;
-
-        boolean rightIsOpenAndRight = rightState.getBlock() instanceof CurtainBlock &&
-                rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.RIGHT;
-
-        boolean leftIsOpenAndLeft = leftState.getBlock() instanceof CurtainBlock &&
-                leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.LEFT;
-
-        boolean aboveIsOpenAndMiddle = aboveState.getBlock() instanceof CurtainBlock &&
-                aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.MIDDLE;
-
-        boolean aboveIsOpenAndLeft = aboveState.getBlock() instanceof CurtainBlock &&
-                aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.LEFT;
-
-        boolean belowIsOpenAndLeft = belowState.getBlock() instanceof CurtainBlock &&
-                belowState.getValue(OPEN) &&
-                belowState.getValue(SHAPE) == CurtainShape.LEFT;
-
-        boolean belowIsOpenAndRight = belowState.getBlock() instanceof CurtainBlock &&
-                belowState.getValue(OPEN) &&
-                belowState.getValue(SHAPE) == CurtainShape.RIGHT;
-
-        boolean aboveIsOpenAndRight = aboveState.getBlock() instanceof CurtainBlock &&
-                aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.RIGHT;
-
-        boolean aboveIsOpenAndTop = aboveState.getBlock() instanceof CurtainBlock &&
-                aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.TOP;
-
-        boolean rightIsOpenAndTop = rightState.getBlock() instanceof CurtainBlock &&
-                rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.TOP;
-
-        boolean leftIsOpenAndTop = leftState.getBlock() instanceof CurtainBlock &&
-                leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.TOP;
-
-        boolean rightIsOpenAndCorner = rightState.getBlock() instanceof CurtainBlock &&
-                rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.CORNER_RIGHT;
-
-        boolean leftIsOpenAndCorner = leftState.getBlock() instanceof CurtainBlock &&
-                leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.CORNER_LEFT;
-
-        boolean rightIsOpenAndMiddle = rightState.getBlock() instanceof CurtainBlock &&
-                rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.MIDDLE;
-
-        boolean leftIsOpenAndMiddle = leftState.getBlock() instanceof CurtainBlock &&
-                leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.MIDDLE;
-
-        // Connections M
-        if (noLeftCurtain && rightIsOpenAndRight && aboveIsOpenAndMiddle && noBelowCurtain) {
-            return CurtainShape.BOTTOM_MIDDLE;
-        }
-        if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndMiddle && noBelowCurtain) {
-            return CurtainShape.BOTTOM_MIDDLE;
-        }
-        if (noRightCurtain && noLeftCurtain && aboveIsOpenAndLeft && noBelowCurtain) {
-            return CurtainShape.BOTTOM_LEFT;
-        }
-        if (noRightCurtain && noLeftCurtain && aboveIsOpenAndRight && noBelowCurtain) {
-            return CurtainShape.BOTTOM_RIGHT;
-        }
-        if (rightIsOpenAndTop && leftIsOpenAndCorner && noAboveCurtain && noBelowCurtain) {
-            return CurtainShape.BOTTOM_SINGLE;
-        }
-        if (noRightCurtain && noLeftCurtain && aboveIsOpenAndLeft && belowIsOpenAndLeft) {
-            return CurtainShape.LEFT;
-        }
-        if (rightIsOpenAndTop && leftIsOpenAndTop && noAboveCurtain && noBelowCurtain) {
-            return CurtainShape.TOP;
-        }
-        if (rightIsOpenAndCorner && leftIsOpenAndCorner && noAboveCurtain && noBelowCurtain) {
-            return CurtainShape.TOP;
-        }
-        if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
-        }
-        if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+        if (!connectedLeft && !connectedRight) {
+            if (connectedAbove && connectedBelow) {
+                return CurtainShape.VERTICAL_MIDDLE;
+            } else if (connectedAbove) {
+                return CurtainShape.BOTTOM_SINGLE;
+            } else {
+                return CurtainShape.TOP_SINGLE;
+            }
         }
 
-        if (rightIsOpenAndMiddle && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
-        }
-
-        if (noRightCurtain && leftIsOpenAndMiddle && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
-        }
-
-        if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndLeft && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
-        }
-
-        if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndRight && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
-        }
-
-        if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndMiddle && belowIsOpenAndLeft) {
-            return CurtainShape.MIDDLE;
-        }
-
-        if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndMiddle && belowIsOpenAndRight) {
-            return CurtainShape.MIDDLE;
-        }
-
-        // Dynamic connections
-        if (!connectedBelow && connectedAbove && connectedLeft && connectedRight) {
-            return CurtainShape.BOTTOM_MIDDLE;
-        }
-        if (!connectedAbove && connectedBelow && !connectedLeft && !connectedRight) {
-            return CurtainShape.TOP_SINGLE;
-        }
         if (!connectedAbove && !connectedBelow) {
-            if (connectedLeft || connectedRight) {
-                return CurtainShape.SINGLE;
+            if (connectedLeft && connectedRight) {
+                return CurtainShape.MIDDLE;
+            } else if (connectedLeft) {
+                return CurtainShape.RIGHT;
+            } else {
+                return CurtainShape.LEFT;
             }
-            return CurtainShape.SINGLE;
         }
-        if (!connectedAbove) {
-            if (connectedLeft && connectedRight) return CurtainShape.TOP;
-            if (!connectedLeft) return CurtainShape.CORNER_LEFT;
-            if (!connectedRight) return CurtainShape.CORNER_RIGHT;
-            return CurtainShape.TOP;
+
+        if (connectedAbove && connectedBelow) {
+            if (connectedLeft && connectedRight) {
+                return CurtainShape.MIDDLE;
+            } else if (connectedLeft) {
+                return CurtainShape.RIGHT;
+            } else {
+                return CurtainShape.LEFT;
+            }
         }
-        if (!connectedBelow) {
-            if (connectedLeft && connectedRight) return CurtainShape.BOTTOM_MIDDLE;
-            if (connectedLeft) {
-                BlockState aboveNeighbor = level.getBlockState(abovePos);
-                BlockState leftNeighbor = level.getBlockState(leftPos);
-                if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
-                        leftNeighbor.getBlock() instanceof CurtainBlock &&
-                        leftNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
-                    return CurtainShape.BOTTOM_MIDDLE;
-                }
+
+        if (connectedAbove) {
+            if (connectedLeft && connectedRight) {
+                return CurtainShape.BOTTOM_MIDDLE;
+            } else if (connectedLeft) {
                 return CurtainShape.BOTTOM_RIGHT;
-            }
-            if (connectedRight) {
-                BlockState aboveNeighbor = level.getBlockState(abovePos);
-                BlockState rightNeighbor = level.getBlockState(rightPos);
-                if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
-                        rightNeighbor.getBlock() instanceof CurtainBlock &&
-                        rightNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
-                    return CurtainShape.BOTTOM_MIDDLE;
-                }
+            } else {
                 return CurtainShape.BOTTOM_LEFT;
             }
-            return CurtainShape.BOTTOM_SINGLE;
         }
-        if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
-        if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
-        if (connectedLeft) return CurtainShape.RIGHT;
-        return CurtainShape.SINGLE;
+
+        if (connectedLeft && connectedRight) {
+            return CurtainShape.TOP;
+        } else if (connectedLeft) {
+            return CurtainShape.CORNER_RIGHT;
+        } else {
+            return CurtainShape.CORNER_LEFT;
+        }
     }
 }
