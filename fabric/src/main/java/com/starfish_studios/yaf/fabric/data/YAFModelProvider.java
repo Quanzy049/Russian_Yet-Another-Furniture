@@ -238,7 +238,7 @@ public class YAFModelProvider extends FabricModelProvider {
         curtainMappings.put(CurtainBlock.CurtainShape.MIDDLE, new OpenClosed(bottomMiddleOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.SINGLE, new OpenClosed(topSingleOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_SINGLE, new OpenClosed(singleOpenResource, bottomMiddleClosedResource));
-
+        curtainMappings.put(CurtainBlock.CurtainShape.VERTICAL_MIDDLE, new OpenClosed(singleOpenResource, defaultClosed));
 
         MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block);
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());

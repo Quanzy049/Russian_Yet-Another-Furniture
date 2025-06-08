@@ -4,7 +4,7 @@ out/
 classes/
 **/run/
 .idea/
-/src/main/generated/.cache/
+common/src/main/generated/.cache/
 *.py
 src/main/generated/logs/latest.log
 /src/main/generated/logs

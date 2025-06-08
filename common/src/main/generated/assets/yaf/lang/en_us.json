@@ -324,7 +324,6 @@
   "item.yaf.warped_cabinet": "Warped Cabinet",
   "item.yaf.warped_chair": "Warped Chair",
   "item.yaf.warped_drawer": "Warped Drawer",
-
   "item.yaf.warped_fan": "Warped Fan",
   "item.yaf.warped_flower_basket": "Warped Flower Basket",
   "item.yaf.warped_lamp": "Warped Lamp",
@@ -337,28 +336,7 @@
   "item.yaf.yellow_curtain": "Yellow Curtain",
   "item.yaf.yellow_sofa": "Yellow Sofa",
   "itemGroup.yaf.tab": "Yet Another Furniture",
-  "key.yaf.tooltip": "Show Tooltip",
   "yaf.mailbox.at": "at",
   "yaf.mailbox.receiving": "Receiving item(s) from %s at %s",
-  "yaf.mailbox.sending": "Sending item(s) from %s at %s",
-
-  "yaf.midnightconfig.category.client": "§9Client",
-  "yaf.midnightconfig.clientComment": "§c§l§n[!]§7§o Configs in this category are client-side and §9§odo not require you to restart your world/server.",
-  "yaf.midnightconfig.stillItems": "§7Still Items",
-  "yaf.midnightconfig.stillItems.tooltip": "§8§o[?]§7§o If enabled, items will not be animated like dropped items.",
-
-  "yaf.midnightconfig.neverShowShelfNumbers": "§7Never Show Shelf Numbers",
-  "yaf.midnightconfig.neverShowShelfNumbers.tooltip": "§8§o[?]§7§o If enabled, shelf numbers will never be shown, even when crouching.",
-  "yaf.midnightconfig.alwaysShowShelfNumbers": "§7Always Show Shelf Numbers",
-  "yaf.midnightconfig.alwaysShowShelfNumbers.tooltip": "§8§o[?]§7§o If enabled, shelf numbers will always be shown, even when not crouching.",
-
-  "yaf.midnightconfig.shelfNumberTag": "§7Shelf Stack Mode",
-  "yaf.midnightconfig.enum.StackCountMode.NEVER": "§cNEVER",
-  "yaf.midnightconfig.enum.StackCountMode.CROUCH": "§eCROUCH",
-  "yaf.midnightconfig.enum.StackCountMode.ALWAYS": "§aALWAYS",
-
-  "yaf.midnightconfig.category.server": "§6Server",
-  "yaf.midnightconfig.serverComment": "§c§l§n[!]§7§o Configs in this category are server-side and §6§orequire you to restart your world/server.",
-  "yaf.midnightconfig.flowerBasketItems": "§7Flower Box Items",
-  "yaf.midnightconfig.flowerBasketItems.tooltip": "§8§o[?]§7§o Items that can be placed in Flower Baskets; accepts tags - i.e. \"#minecraft:flowers\" or \"minecraft:poppy\"."
+  "yaf.mailbox.sending": "Sending item(s) from %s at %s"
 }

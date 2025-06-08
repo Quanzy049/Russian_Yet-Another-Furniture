@@ -1,7 +1,0 @@
-{
-  "parent": "yaf:block/template/chair_2",
-  "textures": {
-    "all": "yaf:block/chair/birch_chair2",
-    "particle": "minecraft:block/birch_planks"
-  }
-}
