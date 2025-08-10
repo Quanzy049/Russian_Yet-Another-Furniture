@@ -18,11 +18,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class WindChimeBlock extends BaseEntityBlock {
 
-    private SoundEvent sound;
+    private final SoundEvent sound;
     public String material;
 
     public WindChimeBlock(String material, SoundEvent sound, Properties properties) {
@@ -34,15 +35,16 @@ public class WindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState state) {
+    public @NotNull RenderShape getRenderShape(BlockState state) {
         return RenderShape.INVISIBLE;
     }
 
 
     private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
+    @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -70,10 +72,16 @@ public class WindChimeBlock extends BaseEntityBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         double d = (double)pos.getX() + 0.5;
-        double e = (double)pos.getY();
+        double e = pos.getY();
         double f = (double)pos.getZ() + 0.5;
         if (random.nextDouble() < 0.09) {
             level.playLocalSound(d, e, f, sound, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            if (level.isClientSide) {
+                BlockEntity be = level.getBlockEntity(pos);
+                if (be instanceof WindChimeBlockEntity windChime) {
+                    windChime.triggerAnimate(80);
+                }
+            }
         }
     }
 

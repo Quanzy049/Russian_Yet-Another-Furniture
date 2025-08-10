@@ -31,20 +31,25 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
         poseStack.translate(0.5D, 1.5D, 0.5D);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
 
-        float baseSwingAngleX = blockEntity.getBaseSwingAngleX(partialTick);
-        float baseSwingAngleZ = blockEntity.getBaseSwingAngleZ(partialTick);
+        float animFactor = blockEntity.getAnimationFactor();
+
+        float baseSwingAngleX = blockEntity.getBaseSwingAngleX(partialTick) * animFactor
+                + blockEntity.getIdleBaseSwingAngleX(partialTick) * (1.0f - animFactor);
+        float baseSwingAngleZ = blockEntity.getBaseSwingAngleZ(partialTick) * animFactor
+                + blockEntity.getIdleBaseSwingAngleZ(partialTick) * (1.0f - animFactor);
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
-        // Apply smooth base rotation
-        model.base.xRot = (float) Math.toRadians(baseSwingAngleX * 12.5f);
-        model.base.zRot = (float) Math.toRadians(baseSwingAngleZ * 12.5f);
+        model.base.xRot = (float) Math.toRadians(baseSwingAngleX * 15.0f * animFactor);
+        model.base.zRot = (float) Math.toRadians(baseSwingAngleZ * 15.0f * animFactor);
 
         for (int i = 0; i < 4; i++) {
-            float chimeAngle = blockEntity.getChimeSwingAngleX(i, partialTick);
+            float chimeAngle = blockEntity.getChimeSwingAngleX(i, partialTick) * animFactor
+                    + blockEntity.getIdleChimeSwingAngleX(i, partialTick) * (1.0f - animFactor);
             model.getChimeBound(i + 1).xRot = (float) Math.toRadians(chimeAngle);
             model.getChime(i + 1).xRot = (float) Math.toRadians(chimeAngle);
 
-            float chimeAngleZ = blockEntity.getChimeSwingAngleZ(i, partialTick);
+            float chimeAngleZ = blockEntity.getChimeSwingAngleZ(i, partialTick) * animFactor
+                    + blockEntity.getIdleChimeSwingAngleZ(i, partialTick) * (1.0f - animFactor);
             model.getChimeBound(i + 1).zRot = (float) Math.toRadians(chimeAngleZ);
             model.getChime(i + 1).zRot = (float) Math.toRadians(chimeAngleZ);
         }
