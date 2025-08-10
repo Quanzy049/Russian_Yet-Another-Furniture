@@ -2,12 +2,8 @@ package com.starfish_studios.yaf.forge;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.YetAnotherFurnitureClient;
-import com.starfish_studios.yaf.client.gui.screens.DrawerScreen;
-import com.starfish_studios.yaf.client.gui.screens.MailboxScreen;
 import com.starfish_studios.yaf.events.ShelfInteractions;
-import com.starfish_studios.yaf.registry.YAFMenus;
 import dev.architectury.platform.forge.EventBuses;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
@@ -69,10 +65,6 @@ public class YetAnotherFurnitureForge {
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(YetAnotherFurnitureClient::init);
-        event.enqueueWork(() -> {
-            MenuScreens.register(YAFMenus.DRAWER.get(), DrawerScreen::new);
-            MenuScreens.register(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
-        });
     }
 
     @SubscribeEvent

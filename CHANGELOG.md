@@ -11,3 +11,5 @@
 - Fixed Curtain connection logic
 - Fixed Chair item
 - Converted Drawer and Cabinet to BER
+
+### 1.0pre3
