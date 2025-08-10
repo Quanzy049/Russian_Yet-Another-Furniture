@@ -1,6 +1,7 @@
 package com.starfish_studios.yaf.fabric.data;
 
 import com.starfish_studios.yaf.registry.YAFBlocks;
+import com.starfish_studios.yaf.registry.YAFItems;
 import com.starfish_studios.yaf.registry.YAFTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -37,5 +38,17 @@ public class YAFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(YAFBlocks.SPIGOT.get());
         getOrCreateTagBuilder(YAFTags.BlockTags.TABLES_CONNECTABLE).add(Blocks.SCAFFOLDING);
+    }
+
+    public static class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
+        public ItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider registries) {
+            var curtains = getOrCreateTagBuilder(YAFTags.ItemTags.CURTAINS);
+            YAFItems.CURTAINS.forEach((color, item) -> curtains.add(item.get()));
+        }
     }
 }

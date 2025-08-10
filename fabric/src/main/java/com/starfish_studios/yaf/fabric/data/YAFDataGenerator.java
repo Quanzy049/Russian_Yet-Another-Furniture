@@ -13,6 +13,7 @@ public class YAFDataGenerator implements DataGeneratorEntrypoint  {
         pack.addProvider(YAFLangProvider::new);
         pack.addProvider(YAFBlockLootTableProvider::new);
         pack.addProvider(YAFBlockTagProvider::new);
+        pack.addProvider(YAFBlockTagProvider.ItemTagsProvider::new);
         pack.addProvider(YAFRecipeProvider::new);
     }
 }

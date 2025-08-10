@@ -20,6 +20,13 @@ public class YAFSoundEvents {
     public static final RegistrySupplier<SoundEvent> SPIGOT_OFF = register("block.spigot.off");
     public static final RegistrySupplier<SoundEvent> CABINET_OPEN = register("block.cabinet.open");
     public static final RegistrySupplier<SoundEvent> CABINET_CLOSE = register("block.cabinet.close");
+    public static final RegistrySupplier<SoundEvent> DRAWER_OPEN = register("block.drawer.open");
+    public static final RegistrySupplier<SoundEvent> DRAWER_CLOSE = register("block.drawer.close");
+    public static final RegistrySupplier<SoundEvent> FAN_ON = register("block.fan.on");
+    public static final RegistrySupplier<SoundEvent> FAN_OFF = register("block.fan.off");
+
+    public static final RegistrySupplier<SoundEvent> MAILBOX_OPEN = register("block.mailbox.open");
+    public static final RegistrySupplier<SoundEvent> MAILBOX_CLOSE = register("block.mailbox.close");
 
 
     public static final RegistrySupplier<SoundEvent> LAMP_ON = register("block.lamp.on");

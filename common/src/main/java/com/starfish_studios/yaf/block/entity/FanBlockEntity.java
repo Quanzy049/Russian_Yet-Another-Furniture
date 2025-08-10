@@ -38,13 +38,8 @@ public class FanBlockEntity extends BlockEntity {
     }
 
     public void commonTick(Level level, BlockState state) {
-        boolean powered = state.getValue(BlockStateProperties.POWERED);
-        if (powered) {
-            fanOn = true;
-        }
-
         if (level.isClientSide()) {
-            if (powered || fanOn) {
+            if (fanOn) {
                 rotationSpeed = Math.min(rotationSpeed + ACCELERATION, MAX_SPEED);
             } else {
                 rotationSpeed = Math.max(rotationSpeed - DECELERATION, 0);
@@ -52,7 +47,7 @@ public class FanBlockEntity extends BlockEntity {
             currentRotation = (currentRotation + rotationSpeed) % 360;
         }
 
-        if (!powered && !fanOn) {
+        if (!fanOn) {
             return;
         }
 

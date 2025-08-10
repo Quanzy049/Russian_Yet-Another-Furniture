@@ -78,14 +78,11 @@ public class FanBlock extends BaseEntityBlock {
             state = state.cycle(BlockStateProperties.POWERED);
             level.setBlock(pos, state, 2);
 
-            if (level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
-                fanBlockEntity.fanOn = state.getValue(BlockStateProperties.POWERED);
-                playSound(level, state, pos);
-            }
+            playSound(level, state, pos);
         } else {
             if (level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
                 fanBlockEntity.fanOn = !fanBlockEntity.fanOn;
-                playSound(level, state, pos);
+                playFanToggleSound(level, pos, fanBlockEntity.fanOn);
             }
         }
 
@@ -101,6 +98,21 @@ public class FanBlock extends BaseEntityBlock {
         }
         if (level.isClientSide && level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
             if (fanBlockEntity.fanOn) {
+                YAFSoundInstance.tryPlay(fanBlockEntity);
+            } else {
+                YAFSoundInstance.stop(fanBlockEntity);
+            }
+        }
+    }
+
+    private void playFanToggleSound(Level level, BlockPos pos, boolean fanOn) {
+        if (fanOn) {
+            level.playSound(null, pos, YAFSoundEvents.FAN_OFF.get(), SoundSource.BLOCKS);
+        } else {
+            level.playSound(null, pos, YAFSoundEvents.FAN_ON.get(), SoundSource.BLOCKS);
+        }
+        if (level.isClientSide && level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
+            if (fanOn) {
                 YAFSoundInstance.tryPlay(fanBlockEntity);
             } else {
                 YAFSoundInstance.stop(fanBlockEntity);

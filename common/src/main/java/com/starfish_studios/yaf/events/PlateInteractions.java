@@ -1,8 +1,8 @@
 package com.starfish_studios.yaf.events;
 /*
-import com.starfish_studios.nookcranny.blocks.PlateBlock;
-import com.starfish_studios.nookcranny.blocks.SofaBlock;
-import com.starfish_studios.nookcranny.blocks.properties.FoodList;
+import com.starfish_studios.yaf.blocks.PlateBlock;
+import com.starfish_studios.yaf.blocks.SofaBlock;
+import com.starfish_studios.yaf.blocks.properties.FoodList;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

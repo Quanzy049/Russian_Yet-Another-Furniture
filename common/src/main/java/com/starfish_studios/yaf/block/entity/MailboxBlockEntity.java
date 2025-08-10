@@ -5,6 +5,7 @@ import com.starfish_studios.yaf.block.MailboxBlock;
 import com.starfish_studios.yaf.block.properties.FlagStatus;
 import com.starfish_studios.yaf.inventory.MailboxMenu;
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
+import com.starfish_studios.yaf.registry.YAFSoundEvents;
 import com.starfish_studios.yaf.world.YAFSavedData;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
@@ -57,12 +58,12 @@ public class MailboxBlockEntity extends BlockEntity
 
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
-                MailboxBlockEntity.this.playSound(blockState, SoundEvents.IRON_TRAPDOOR_OPEN);
+                MailboxBlockEntity.this.playSound(blockState, YAFSoundEvents.MAILBOX_OPEN.get());
                 MailboxBlockEntity.this.updateBlockState(blockState, true);
             }
 
             protected void onClose(Level level, BlockPos blockPos, BlockState blockState) {
-                MailboxBlockEntity.this.playSound(blockState, SoundEvents.IRON_TRAPDOOR_CLOSE);
+                MailboxBlockEntity.this.playSound(blockState, YAFSoundEvents.MAILBOX_CLOSE.get());
                 MailboxBlockEntity.this.updateBlockState(blockState, false);
             }
 

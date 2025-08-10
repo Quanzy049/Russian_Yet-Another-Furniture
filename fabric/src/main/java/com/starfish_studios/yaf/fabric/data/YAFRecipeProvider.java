@@ -1,14 +1,19 @@
 package com.starfish_studios.yaf.fabric.data;
 
+import com.starfish_studios.yaf.registry.YAFDyeColor;
 import com.starfish_studios.yaf.registry.YAFItems;
+import com.starfish_studios.yaf.registry.YAFTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
@@ -53,6 +58,10 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
 
         YAFItems.SOFAS.forEach((dyeColor, drawerSupplier) -> {
             createSofa(consumer, drawerSupplier.get(), dyeColor.getWool().asItem());
+        });
+
+        YAFItems.CURTAINS.forEach((dyeColor, supplier) -> {
+            createCurtain(consumer, supplier.get(), dyeColor);
         });
 
 
@@ -168,6 +177,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .define('W', wool)
                 .pattern("W ")
                 .pattern("WW")
+                .group("yaf:sofas")
                 .unlockedBy("has_slab", has(wool))
                 .save(consumer);
     }
@@ -204,6 +214,32 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .pattern("PSP")
                 .unlockedBy("has_nugget", has(Items.IRON_NUGGET))
                 .save(consumer);
+    }
+
+    private void createCurtain(Consumer<FinishedRecipe> consumer, Item curtain, YAFDyeColor color) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, curtain, 8)
+                .define('S', Items.STICK)
+                .define('W', color.getWool().asItem())
+                .pattern("SS")
+                .pattern("WW")
+                .pattern("WW")
+                .group("yaf:curtains")
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .unlockedBy("has_stick", has(Items.STICK))
+                .save(consumer);
+
+        ItemLike dyeItem = DyeItem.byColor(color.getDyeColor());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, curtain)
+                .requires(YAFTags.ItemTags.CURTAINS)
+                .requires(dyeItem)
+                .group("yaf:curtains")
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .unlockedBy("has_stick", has(Items.STICK))
+                .save(consumer, getDyeRecipeId(color.getName()));
+    }
+
+    private static String getDyeRecipeId(String to) {
+        return "yaf:dye_curtain_to_" + to;
     }
 
     private void createLamp(Consumer<FinishedRecipe> consumer, Item lamp, Item wood) {

@@ -31,7 +31,7 @@ public interface YAFTags {
     }
 
     class ItemTags {
-
+        public static final TagKey<Item> CURTAINS = tag("curtains");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation(YetAnotherFurniture.MOD_ID, name));

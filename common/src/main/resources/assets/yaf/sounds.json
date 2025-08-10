@@ -5,7 +5,7 @@
       "yaf:block/cabinet/open_2",
       "yaf:block/cabinet/open_3"
     ],
-    "subtitle": "yaf.subtitles.block.cabinet.open"
+    "subtitle": "subtitles.yaf.block.cabinet.open"
   },
   "block.cabinet.close": {
       "sounds": [
@@ -13,20 +13,35 @@
       "yaf:block/cabinet/close_2",
       "yaf:block/cabinet/close_3"
       ],
-      "subtitle": "yaf.subtitles.block.cabinet.close"
+      "subtitle": "subtitles.yaf.block.cabinet.close"
+  },
+
+
+  "block.drawer.close": {
+    "sounds": [
+      "block/barrel/close"
+    ],
+    "subtitle": "subtitles.yaf.block.drawer.close"
+  },
+  "block.drawer.open": {
+    "sounds": [
+      "block/barrel/open1",
+      "block/barrel/open2"
+    ],
+    "subtitle": "subtitles.yaf.block.drawer.open"
   },
 
   "block.spigot.on": {
     "sounds": [
       "yaf:block/spigot/on"
     ],
-    "subtitle": "yaf.subtitles.block.spigot.on"
+    "subtitle": "subtitles.yaf.block.spigot.on"
   },
   "block.spigot.off": {
       "sounds": [
       "yaf:block/spigot/off"
       ],
-      "subtitle": "yaf.subtitles.block.spigot.off"
+      "subtitle": "subtitles.yaf.block.spigot.off"
   },
 
   "block.windchimes.amethyst": {
@@ -36,7 +51,7 @@
       "yaf:block/windchimes/amethyst/idle_3",
       "yaf:block/windchimes/amethyst/idle_4"
     ],
-    "subtitle": "yaf.subtitles.block.windchimes.amethyst"
+    "subtitle": "subtitles.yaf.block.windchimes.amethyst"
   },
   "block.windchimes.bamboo": {
     "sounds": [
@@ -45,7 +60,7 @@
       "yaf:block/windchimes/bamboo/idle_3",
       "yaf:block/windchimes/bamboo/idle_4"
     ],
-    "subtitle": "yaf.subtitles.block.windchimes.bamboo"
+    "subtitle": "subtitles.yaf.block.windchimes.bamboo"
   },
   "block.windchimes.bone": {
     "sounds": [
@@ -54,7 +69,7 @@
       "yaf:block/windchimes/bone/idle_3",
       "yaf:block/windchimes/bone/idle_4"
     ],
-    "subtitle": "yaf.subtitles.block.windchimes.bone"
+    "subtitle": "subtitles.yaf.block.windchimes.bone"
   },
   "block.windchimes.copper": {
     "sounds": [
@@ -63,7 +78,7 @@
       "yaf:block/windchimes/copper/idle_3",
       "yaf:block/windchimes/copper/idle_4"
     ],
-    "subtitle": "yaf.subtitles.block.windchimes.copper"
+    "subtitle": "subtitles.yaf.block.windchimes.copper"
   },
   "block.windchimes.echo_shard": {
     "sounds": [
@@ -72,7 +87,7 @@
       "yaf:block/windchimes/echo_shard/idle_3",
       "yaf:block/windchimes/echo_shard/idle_4"
     ],
-    "subtitle": "yaf.subtitles.block.windchimes.echo_shard"
+    "subtitle": "subtitles.yaf.block.windchimes.echo_shard"
   },
   "block.lamp.on": {
     "sounds": [
@@ -81,7 +96,7 @@
       "yaf:block/lamp/on_3",
       "yaf:block/lamp/on_4"
     ],
-    "subtitle": "yaf.subtitles.block.lamp.on"
+    "subtitle": "subtitles.yaf.block.lamp.on"
   },
   "block.lamp.off": {
     "sounds": [
@@ -90,12 +105,74 @@
       "yaf:block/lamp/off_3",
       "yaf:block/lamp/off_4"
     ],
-    "subtitle": "yaf.subtitles.block.lamp.off"
+    "subtitle": "subtitles.yaf.block.lamp.off"
   },
   "block.fan.ambience": {
     "sounds": [
       "yaf:block/fan/ambience"
     ],
-    "subtitle": "yaf.subtitles.block.lamp.ambience"
+    "subtitle": "subtitles.yaf.block.fan.ambience"
+  },
+
+  "block.mailbox.close": {
+    "sounds": [
+      {
+        "name": "block/iron_trapdoor/close1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/close2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/close3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/close4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.yaf.block.mailbox.close"
+  },
+  "block.mailbox.open": {
+    "sounds": [
+      {
+        "name": "block/iron_trapdoor/open1",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/open2",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/open3",
+        "volume": 0.9
+      },
+      {
+        "name": "block/iron_trapdoor/open4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.yaf.block.mailbox.open"
+  },
+
+  "block.fan.on": {
+    "sounds": [
+      "yaf:block/lamp/on_1",
+      "yaf:block/lamp/on_2",
+      "yaf:block/lamp/on_3",
+      "yaf:block/lamp/on_4"
+    ],
+    "subtitle": "subtitles.yaf.block.fan.on"
+  },
+  "block.fan.off": {
+    "sounds": [
+      "yaf:block/lamp/off_1",
+      "yaf:block/lamp/off_2",
+      "yaf:block/lamp/off_3",
+      "yaf:block/lamp/off_4"
+    ],
+    "subtitle": "subtitles.yaf.block.fan.off"
   }
 }

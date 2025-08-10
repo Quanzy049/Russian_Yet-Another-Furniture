@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "yaf:curtains",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:purple_wool"
+    }
+  },
+  "pattern": [
+    "SS",
+    "WW",
+    "WW"
+  ],
+  "result": {
+    "count": 8,
+    "item": "yaf:purple_curtain"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "yaf:lime_curtain",
+    "yaf:yellow_curtain",
+    "yaf:blue_curtain",
+    "yaf:red_curtain",
+    "yaf:white_curtain",
+    "yaf:purple_curtain",
+    "yaf:light_blue_curtain",
+    "yaf:pink_curtain",
+    "yaf:magenta_curtain",
+    "yaf:cyan_curtain",
+    "yaf:orange_curtain",
+    "yaf:gray_curtain",
+    "yaf:green_curtain",
+    "yaf:light_gray_curtain",
+    "yaf:brown_curtain",
+    "yaf:black_curtain"
+  ]
+}

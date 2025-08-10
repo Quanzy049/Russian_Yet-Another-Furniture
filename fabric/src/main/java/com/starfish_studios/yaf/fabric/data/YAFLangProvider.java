@@ -53,6 +53,29 @@ public class YAFLangProvider extends FabricLanguageProvider {
         builder.add( "yaf.mailbox.sending", "Sending item(s) from %s at %s");
         builder.add( "yaf.mailbox.receiving", "Receiving item(s) from %s at %s");
         builder.add( "yaf.mailbox.at", "at");
+
+        builder.add("subtitles.yaf.block.windchimes.amethyst", "Amethyst Wind Chimes twinkling");
+        builder.add("subtitles.yaf.block.windchimes.bamboo", "Bamboo Wind Chimes clattering");
+        builder.add("subtitles.yaf.block.windchimes.bone", "Bone Wind Chimes rattling");
+        builder.add("subtitles.yaf.block.windchimes.copper", "Copper Wind Chimes tinkling");
+        builder.add("subtitles.yaf.block.windchimes.echo_shard", "Echo Shard Wind Chimes resonating");
+        builder.add("subtitles.yaf.block.spigot.on", "Spigot turns on");
+        builder.add("subtitles.yaf.block.spigot.off", "Spigot turns off");
+        builder.add("subtitles.yaf.block.cabinet.open", "Cabinet opens");
+        builder.add("subtitles.yaf.block.cabinet.close", "Cabinet closes");
+
+        builder.add("subtitles.yaf.block.drawer.open", "Drawer opens");
+        builder.add("subtitles.yaf.block.drawer.close", "Drawer closes");
+
+        builder.add("subtitles.yaf.block.lamp.on", "Light turns on");
+        builder.add("subtitles.yaf.block.lamp.off", "Light turns off");
+        builder.add("subtitles.yaf.block.fan.ambience", "Fan whirring");
+
+        builder.add("subtitles.yaf.block.mailbox.open", "Mailbox opens");
+        builder.add("subtitles.yaf.block.mailbox.close", "Mailbox closes");
+
+        builder.add("subtitles.yaf.block.fan.on", "Fan turns on");
+        builder.add("subtitles.yaf.block.fan.off", "Fan turns off");
     }
 
     private static final Set<String> LOWERCASE_WORDS = new HashSet<>(Arrays.asList("and", "or"));

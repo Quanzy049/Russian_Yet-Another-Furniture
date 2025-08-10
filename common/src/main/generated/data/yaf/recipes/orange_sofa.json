@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "yaf:sofas",
   "key": {
     "W": {
       "item": "minecraft:orange_wool"

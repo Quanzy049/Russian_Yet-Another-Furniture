@@ -10,6 +10,7 @@ import com.starfish_studios.yaf.block.DrawerBlock;
 import com.starfish_studios.yaf.block.properties.CountertopType;
 import com.starfish_studios.yaf.inventory.DrawerMenu;
 import com.mojang.datafixers.util.Pair;
+import com.starfish_studios.yaf.registry.YAFSoundEvents;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
 import net.minecraft.core.BlockPos;
@@ -46,8 +47,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlockEntity implements MenuProvider {
-    private static final SoundEvent SOUND_OPEN = SoundEvents.BARREL_OPEN;
-    private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
+    private static final SoundEvent SOUND_OPEN = YAFSoundEvents.DRAWER_OPEN.get();
+    private static final SoundEvent SOUND_CLOSE = YAFSoundEvents.DRAWER_CLOSE.get();
 
     public CountertopType countertopType;
     private NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);

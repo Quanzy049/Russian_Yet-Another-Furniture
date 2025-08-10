@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "yaf:curtains",
+  "ingredients": [
+    {
+      "tag": "yaf:curtains"
+    },
+    {
+      "item": "minecraft:gray_dye"
+    }
+  ],
+  "result": {
+    "item": "yaf:gray_curtain"
+  }
+}

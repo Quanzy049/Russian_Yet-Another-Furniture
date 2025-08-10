@@ -98,7 +98,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 if (state.getValue(FLAG_STATUS) == FlagStatus.DOWN) {
                     assert blockEntity != null;
                     player.displayClientMessage(
-                            Component.translatable("nookcranny.mailbox.sending",
+                            Component.translatable("yaf.mailbox.sending",
                                             mailboxBlockEntity.getMailboxName(),
                                             "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
                             ).withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC), true
@@ -108,7 +108,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 } else if (state.getValue(FLAG_STATUS) == FlagStatus.UP) {
                     assert blockEntity != null;
                     player.displayClientMessage(
-                            Component.translatable("nookcranny.mailbox.receiving",
+                            Component.translatable("yaf.mailbox.receiving",
                                     mailboxBlockEntity.getMailboxName(),
                                     "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
                             ).withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC), true
