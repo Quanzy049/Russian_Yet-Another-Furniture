@@ -29,7 +29,7 @@ public class DrawerMenu extends AbstractContainerMenu {
 
     public DrawerMenu(int i, Inventory inventory, Container container, int listOffset) {
         super(YAFMenus.DRAWER.get(), i);
-        checkContainerSize(container, 5);
+        AbstractContainerMenu.checkContainerSize(container, SLOT_COUNT);
         this.drawer = container;
         container.startOpen(inventory.player);
         int j;

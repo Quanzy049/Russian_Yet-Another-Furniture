@@ -86,7 +86,9 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
         Direction hitLoc = hit.getDirection();
 
         if (blockEntity instanceof AbstractDrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
-            player.openMenu(drawerBlockEntity);
+            if (!level.isClientSide) {
+                player.openMenu(drawerBlockEntity);
+            }
             return InteractionResult.SUCCESS;
         }
 

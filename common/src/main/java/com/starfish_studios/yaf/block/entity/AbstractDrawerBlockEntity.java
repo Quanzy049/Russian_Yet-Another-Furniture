@@ -158,7 +158,6 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
         if (raycastResult.getSecond() == this.getBlockState().getValue(DrawerBlock.FACING)) {
             if (blockEntity instanceof AbstractDrawerBlockEntity abstractDrawerBlockEntity) {
                 if (abstractDrawerBlockEntity instanceof CabinetBlockEntity) {
-                    // Swap left/right naming: positive dot now means right side.
                     if (raycastResult.getFirst() > 0) {
                         abstractDrawerBlockEntity.setCustomName(Component.translatable("container.cabinet_right"));
                     } else {
@@ -180,17 +179,29 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
         return null;
     }
 
+    public void openMenuOnServer(ServerPlayer serverPlayer, BlockHitResult blockHitResult) {
+        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
+        if (blockHitResult != null) {
+            Vec3 localHitPos = blockHitResult.getLocation().subtract(Vec3.atCenterOf(blockHitResult.getBlockPos()));
+            boolean isCabinet = this.getBlockState().getBlock() instanceof CabinetBlock;
+            int relativePos = getRelativeDrawerPos(blockHitResult.getDirection(), localHitPos, isCabinet);
+            raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
+        }
+        if (raycastResult.getSecond() == this.getBlockState().getValue(DrawerBlock.FACING)) {
+            openScreen(this, serverPlayer, raycastResult);
+        }
+    }
+
     private void openScreen(AbstractDrawerBlockEntity blockEntity, ServerPlayer player, Pair<Integer, Direction> raycastResult) {
         MenuRegistry.openExtendedMenu(player, new ExtendedMenuProvider() {
             @Override
             public void saveExtraData(FriendlyByteBuf buf) {
-
             }
 
             @Override
             public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
                 int drawerIndex = (blockEntity instanceof CabinetBlockEntity)
-                        ? (raycastResult.getFirst() > 0 ? 5 : 0)  // Right side gets index 5, left side gets 0.
+                        ? (raycastResult.getFirst() > 0 ? 5 : 0)
                         : (raycastResult.getFirst() < 7 ? 0 : 5);
                 return new DrawerMenu(id, inventory, blockEntity, drawerIndex);
             }

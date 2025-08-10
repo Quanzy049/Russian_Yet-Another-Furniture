@@ -47,10 +47,8 @@ public class YetAnotherFurnitureClient {
         BlockEntityRendererRegistry.register(YAFBlockEntities.DRAWER.get(), DrawerBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.CABINET.get(), DrawerBlockEntityRenderer::new);
 
-        ClientLifecycleEvent.CLIENT_SETUP.register(instance -> {
-            MenuRegistry.registerScreenFactory(YAFMenus.DRAWER.get(), DrawerScreen::new);
-            MenuRegistry.registerScreenFactory(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
-        });
+        MenuRegistry.registerScreenFactory(YAFMenus.DRAWER.get(), DrawerScreen::new);
+        MenuRegistry.registerScreenFactory(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
 
         NetworkManager.registerReceiver(NetworkManager.Side.S2C, MailboxBlockEntity.packetChannel, ((buf, context) -> {
             var pos = buf.readBlockPos();
@@ -58,6 +56,7 @@ public class YetAnotherFurnitureClient {
 
             var client = Minecraft.getInstance();
             client.execute(() -> {
+                assert client.level != null;
                 var be = client.level.getBlockEntity(pos);
                 if (be instanceof MailboxBlockEntity mailbox) {
                     mailbox.failedToSend = state;
@@ -73,6 +72,7 @@ public class YetAnotherFurnitureClient {
             var state = buf.readBoolean();
             var client = Minecraft.getInstance();
             client.execute(() -> {
+                assert client.level != null;
                 var be = client.level.getBlockEntity(pos);
                 if (be instanceof MailboxBlockEntity mailbox) {
                     mailbox.failedToSend = state;
