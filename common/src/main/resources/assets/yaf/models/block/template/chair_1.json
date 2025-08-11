@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
-	"textures": {
-		"particle": "yaf:block/chair/oak_chair",
-		"all": "block/oak_planks"
-	},
+    "textures": {
+        "particle": "yaf:block/chair/oak_chair1",
+        "all": "block/oak_planks"
+    },
 	"elements": [
 		{
 			"from": [12, 10, 13],

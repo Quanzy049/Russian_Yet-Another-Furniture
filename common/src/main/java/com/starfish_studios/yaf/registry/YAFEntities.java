@@ -15,6 +15,6 @@ public class YAFEntities {
     public static final RegistrySupplier<EntityType<SeatEntity>> SEAT = ENTITY_TYPES.register("seat", () ->
             EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC)
                     .sized(0f, 0f)
-                    .build("seat"));
+                    .build(YetAnotherFurniture.MOD_ID + ":seat"));
 
 }
