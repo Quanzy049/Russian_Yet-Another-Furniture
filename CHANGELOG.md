@@ -13,3 +13,11 @@
 - Converted Drawer and Cabinet to BER
 
 ### 1.0pre3
+- Fixed all sound translations
+- Gave Curtains recipes + advancements
+- Made sounds mono so they're now directional + fade out with distance
+- Gave Wind Chimes an idle/active animation + transitions
+- Made menus open properly on Fabric
+- Fixed misc. log errors
+- Added black lampshade
+- Fixed invisible Lamp rendering
